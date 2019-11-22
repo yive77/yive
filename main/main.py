@@ -17,12 +17,13 @@ import utility
 from flask import Flask
 from flask_cors import CORS
 from flask_session import Session
+from config import Config
 
 
 # create the app instance
 def create_flask_app():
     app = Flask(__name__)
-    app.secret_key = "3e7a2fca63a14698adb3c70d43e1f472"
+    app.secret_key = Config.secret_key
     app.config["SESSION_TYPE"] = "filesystem"
     CORS(app)
     Session(app)
