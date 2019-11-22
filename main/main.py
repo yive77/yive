@@ -13,23 +13,37 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import utility
+from flask import Flask
+from flask_cors import CORS
+from flask_session import Session
 
-from flask import Flask, redirect, render_template, request, jsonify, url_for
 
+# create the app instance
 def create_flask_app():
-    app = Flask(__name__)    
-    app.debug = True
+    app = Flask(__name__)
+    app.secret_key = "3e7a2fca63a14698adb3c70d43e1f472"
+    app.config["SESSION_TYPE"] = "filesystem"
+    CORS(app)
+    Session(app)
     return app
 
-def setup_app():
-    app = create_flask_app()
+
+# register our dynamically imported blueprints.
+def register_blueprints(app):
+    app_blueprints = utility.read_blueprints()
+    for bp in app_blueprints:
+        app.register_blueprint(bp)
     return app
 
-app = setup_app()
 
-@app.route("/", methods=["GET"])
-def index():
-    return "Hello world"
+app = register_blueprints(create_flask_app())
+
+if __name__ == '__main__':
+    # This is used when running locally only. When deploying to Google App
+    # Engine, a webserver process such as Gunicorn will serve the app. This
+    # can be configured by adding an `entrypoint` to app.yaml.
+    app.run(host='0.0.0.0', port=8080, debug=True)
 
 
 
