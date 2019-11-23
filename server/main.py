@@ -17,14 +17,14 @@ import utility
 from flask import Flask
 from flask_cors import CORS
 from flask_session import Session
-from config import Config
+from config import Config, FlaskConfig
 
 
 # create the app instance
 def create_flask_app():
     app = Flask(__name__)
-    app.secret_key = Config.secret_key
-    app.config["SESSION_TYPE"] = "filesystem"
+    app.config.from_object(FlaskConfig)
+    print(app.debug)
     CORS(app)
     Session(app)
     return app
@@ -44,7 +44,7 @@ if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
     # Engine, a webserver process such as Gunicorn will serve the app. This
     # can be configured by adding an `entrypoint` to app.yaml.
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    app.run(host='0.0.0.0', port=8081, debug=True)
 
 
 
