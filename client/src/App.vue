@@ -1,17 +1,14 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <NoAuthHeader/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import NoAuthHeader from './components/NoAuthHeader.vue'
 
 export default {
   name: 'app',
   components: {
-    NoAuthHeader
   }
 }
 </script>
