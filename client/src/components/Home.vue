@@ -1,6 +1,5 @@
 <template>
     <div class="">
-        <NoAuthHeader></NoAuthHeader>
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
                 <h1>Digital Identity Verification</h1>
@@ -11,12 +10,10 @@
 </template>
 
 <script>
-    import NoAuthHeader from './NoAuthHeader'
 
     export default {
         name: "Home",
         components: {
-            NoAuthHeader
         }
     }
 

@@ -14,18 +14,23 @@
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div> -->
-            <button type="submit" class="btn btn-primary form-control">Submit</button>
+            <button @click="login" type="submit" class="btn btn-primary form-control">Submit</button>
         </form>
     </div>
 </template>
 
 <script>
     export default {
-        name: "LoginForm"
+        name: "LoginForm",
+        methods: {
+            login: function() {
+                console.log("logging in");
+            }
+        }
     }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 .login-container {
     display: flex;

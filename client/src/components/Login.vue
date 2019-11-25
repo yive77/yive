@@ -1,6 +1,6 @@
 <template>
     <div class="height-full">
-        <NoAuthHeader :class=""></NoAuthHeader>
+        <NoAuthHeader :tab="login"></NoAuthHeader>
         <LoginForm></LoginForm>
     </div>
 </template>

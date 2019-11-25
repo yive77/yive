@@ -1,10 +1,11 @@
-import Vue from 'vue'
-import App from './App'
+import Vue from 'vue';
+import App from './App';
 import VueRouter from 'vue-router';
-import OAuthHandler from './components/OAuthHandler'
-import Login from './components/Login'
-import Home from './components/Home'
-import Register from './components/Register'
+import OAuthHandler from './components/OAuthHandler';
+import Login from './components/Login';
+import Home from './components/Home';
+import Register from './components/Register';
+import store from './components/store/index';
 
 Vue.use(VueRouter);
 Vue.config.productionTip = false
@@ -28,6 +29,7 @@ const router = new VueRouter({
 });
 
 new Vue({
+    store,
     router,
     render: h => h(App),
 }).$mount('#app')
