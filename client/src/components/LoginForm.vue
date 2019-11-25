@@ -27,19 +27,18 @@
 
 <style lang="scss">
 
-    .login-container {
+.login-container {
+    display: flex;
+    align-items: center;
+    height: calc(100% - #{$navbar-height});
+    width: 50%;
+    margin: 0 auto;
 
-        display: flex;
-        align-items: center;
-        height: calc(100% - #{$navbar-height});
-        width: 50%;
-        margin: 0 auto;
-
-        form {
-            box-shadow: $box-shadow !important;
-            width: 100%;
-            padding: 20px;
-        }
+    form {
+        box-shadow: $box-shadow !important;
+        width: 100%;
+        padding: 40px;
     }
+}
 
 </style>

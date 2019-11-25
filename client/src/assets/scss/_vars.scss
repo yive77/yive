@@ -15,3 +15,9 @@ html, body {
 .height-full {
     height: 100%;
 }
+
+.link-hover {
+    background: $fg-primary;
+    color: $bg-primary !important;
+    cursor: pointer;
+}

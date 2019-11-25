@@ -1,6 +1,6 @@
 <template>
     <div class="height-full">
-        <NoAuthHeader></NoAuthHeader>
+        <NoAuthHeader :class=""></NoAuthHeader>
         <LoginForm></LoginForm>
     </div>
 </template>
@@ -19,6 +19,5 @@
 </script>
 
 <style lang="scss">
-
 
 </style>

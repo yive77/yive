@@ -13,15 +13,15 @@ inbound_services:
 libraries:
   - name: ssl
     version: latest
-  
+
 handlers:
 
-- url: /static
-  static_dir: static/
+- url: /js
+  static_dir: dist/js
+
+- url: /css
+  static_dir: dist/css
 
 - url: /.*
   script: main.app
   secure: always
-
-
-

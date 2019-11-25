@@ -2,3 +2,4 @@
 main/lib
 *.pyc
 flask_session
+dist
