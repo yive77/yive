@@ -66,8 +66,12 @@
                 }
                 if (form_valid) {
                     axios.post(registerApi, qs.stringify(form)).then(response => {
+                        console.log(response)
                         if (response.data.error) {
                             this.form_error = response.data.message
+                        } else if (response.data.success) {
+                            console.log("registration success")
+                            this.$router.push('/login');
                         }
                     }).catch(error => {
                         console.log(error);

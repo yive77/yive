@@ -26,6 +26,7 @@ def read_blueprints():
 def remove_keys(obj, keys=[]):
 	for k in keys:
 		del obj[k]
+	return obj
 
 
 

@@ -12,7 +12,9 @@ class MongoHandler:
 
 	def exists(self, key, value):
 		existing_record = self.db.users.find_one({key: value})
-		return True if existing_record else False 
+		if existing_record:
+			return True 
+		return False 
 
 	def store_user(self, register_form):
 		email = register_form["email"]
