@@ -3,7 +3,7 @@ from flask import Blueprint, request, render_template, jsonify
 from flask_cors import cross_origin
 from middleware import *
 from errors import *
-
+from responses import *
 from mongo_handler import MongoHandler
 
 auth_blueprint = Blueprint('auth_blueprint', __name__, template_folder='templates')
@@ -21,11 +21,9 @@ def register(*args, **kwargs):
 		else:
 			mongo = MongoHandler()
 			user = mongo.store_user(request.form)
-			print(user)
-			return "success"
+			return jsonify(success_response) if user else jsonify(email_taken_error)
 
 	except Exception as e:
 		print(str(e))
 		return str(e)
-		pass
 

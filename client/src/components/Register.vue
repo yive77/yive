@@ -37,13 +37,6 @@
 
         },
 
-        // props: [
-        //     "firstName",
-        //     "lastName",
-        //     "email",
-        //     "password"
-        // ],
-
         data: function() {
             return {
                 firstName: '',
@@ -61,8 +54,6 @@
                     email: this.email,
                     password: this.password
                 };
-                let form_query_string = qs.stringify(form);
-                console.log(form_query_string);
                 
                 axios.post(registerApi, qs.stringify(form)).then(response => {
                     console.log(response)
