@@ -8,7 +8,7 @@ class Config:
 		"__pycache__",
 		"__init__.py"
 	]
-	mongodb_connstr = "mongodb+srv://dylan:<winning123>@cluster0-1pnsw.gcp.mongodb.net/test?retryWrites=true&w=majority"
+	mongodb_connstr = "mongodb+srv://dylan:winning123@cluster0-1pnsw.gcp.mongodb.net/test?retryWrites=true&w=majority"
 
 
 class FlaskConfig:

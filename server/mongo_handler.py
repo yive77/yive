@@ -19,6 +19,7 @@ class MongoHandler:
 			return False
 		user = self.create_user(register_form)
 		self.db.users.insert_one(user)
+		return user
 
 	def create_user(self, register_form):
 		user = {}
@@ -26,8 +27,9 @@ class MongoHandler:
 		user["first_name"] = register_form.get("first_name")
 		user["email"] = register_form.get("email")
 		user["password_hash"], user["salt"] = self.encrypt_user_pw(register_form["password"])
-		
+		return user 
+
 	def encrypt_user_pw(self, password):
 		user_salt = uuid.uuid4().hex 
-		user_password_hash = hmac.new(b'%s' % user_salt, b'%s' % password).hexdigest()
-		return user_password_hash, user_salt
+		user_password_hash = hmac.new(bytes(user_salt, 'utf-8'), bytes(password, 'utf-8')).hexdigest()
+		return (user_password_hash, user_salt)
