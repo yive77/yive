@@ -1,6 +1,7 @@
 <template>
     <form v-on:submit.prevent="onSubmit" class="ui form main-form">
         <div class="form-inner">
+            <div class="form-error">{{ form_error }} </div>
             <div class="field">
                 <label>First Name</label>
                 <input v-model="firstName" type="text" name="first_name" placeholder="First Name">
@@ -42,7 +43,8 @@
                 firstName: '',
                 lastName: '',
                 email: '',
-                password:  ''
+                password:  '',
+                form_error: ''
             }
         },
 
@@ -56,7 +58,9 @@
                 };
                 
                 axios.post(registerApi, qs.stringify(form)).then(response => {
-                    console.log(response)
+                    if (response.data.error) {
+                        this.form_error = response.data.message
+                    }
                 }).catch(error => {
                     console.log(error);
                 })
@@ -70,4 +74,7 @@
 
 <style lang="scss" scoped>
 
+    .form-error {
+        color: $error-color;
+    }
 </style>

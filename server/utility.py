@@ -22,4 +22,11 @@ def read_blueprints():
 	return blueprint_instances
 
 
+# remove keys from values as we need to
+def remove_keys(obj, keys=[]):
+	for k in keys:
+		del obj[k]
+
+
+
 

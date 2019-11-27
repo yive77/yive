@@ -6,6 +6,8 @@ from errors import *
 from responses import *
 from mongo_handler import MongoHandler
 
+import utility 
+
 auth_blueprint = Blueprint('auth_blueprint', __name__, template_folder='templates')
 
 
