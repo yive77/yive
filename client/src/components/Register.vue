@@ -4,19 +4,19 @@
             <div class="form-error">{{ form_error }} </div>
             <div class="field">
                 <label>First Name</label>
-                <input v-model="firstName" type="text" name="first_name" placeholder="First Name">
+                <input v-model="firstName" type="text" name="first_name" placeholder="First Name" required>
             </div>
             <div class="field">
                 <label>Last Name</label>
-                <input v-model="lastName" type="text" name="last_name" placeholder="Last Name">
+                <input v-model="lastName" type="text" name="last_name" placeholder="Last Name" required>
             </div>
             <div class="field">
                 <label for="email">Email</label>
-                <input v-model="email" id="email" type="text" placeholder="Email">
+                <input v-model="email" id="email" type="text" placeholder="Email" required>
             </div>
             <div class="field">
                 <label for="password">Password</label>
-                <input v-model="password" id="password" type="text" placeholder="Password">
+                <input v-model="password" id="password" type="text" placeholder="Password" required>
             </div>
             <button @click="register" class="ui button login-btn" type="submit">Register</button>
         </div>
@@ -57,13 +57,24 @@
                     password: this.password
                 };
                 
-                axios.post(registerApi, qs.stringify(form)).then(response => {
-                    if (response.data.error) {
-                        this.form_error = response.data.message
+                var form_valid = true;
+
+                for (var key in form) {
+                    if (form[key].trim().length === 0) {
+                        form_valid = false;
                     }
-                }).catch(error => {
-                    console.log(error);
-                })
+                }
+                if (form_valid) {
+                    axios.post(registerApi, qs.stringify(form)).then(response => {
+                        if (response.data.error) {
+                            this.form_error = response.data.message
+                        }
+                    }).catch(error => {
+                        console.log(error);
+                    })
+                } else {
+                    this.form_error = "All fields are required";
+                }
             },
             onSubmit: function() {
                 
