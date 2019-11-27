@@ -5,7 +5,7 @@ import OAuthHandler from './components/OAuthHandler';
 import Login from './components/Login';
 import Home from './components/Home';
 import Register from './components/Register';
-import store from './components/store/index';
+import store from './store/index';
 
 Vue.use(VueRouter);
 Vue.config.productionTip = false

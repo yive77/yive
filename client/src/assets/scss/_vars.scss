@@ -2,10 +2,31 @@ $box-shadow: 0 1px 5px 0 rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px 
 $bg-primary: white;
 $fg-primary: cornflowerblue;
 $navbar-height: 60px;
+$footer-height: 50px;
 
 html, body {
     @extend .height-full;
     @extend .width-full;
+}
+
+.main-form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: calc(100% - #{$navbar-height} - #{$footer-height});
+
+    .form-inner {
+        width: 50%;
+        margin: 0 auto;
+        padding: 40px;
+        box-shadow: $box-shadow;
+    }
+
+    .login-btn {
+        width: 100%;
+        background: $fg-primary;
+        color: $bg-primary;
+    }
 }
 
 .width-full {

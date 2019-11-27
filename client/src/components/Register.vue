@@ -1,60 +1,77 @@
 <template>
-    <div class="height-full">
-        <NoAuthHeader></NoAuthHeader>
-        <div class="register-container">
-            <form>
-                <div class="form-group">
-                    <label for="register-email">Email address</label>
-                    <input type="email" class="form-control" id="register-email" aria-describedby="emailHelp" placeholder="Enter email">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                </div>
-                <div class="form-group">
-                    <label for="register-password">Password</label>
-                    <input type="password" class="form-control" id="register-password" placeholder="Password">
-                </div>
-                <div class="text-center width-full">Or</div>
-                <div class="social-buttons">
-                    <a class="btn btn-social btn-facebook">
-                        <i class="fa fa-2x fa-facebook"></i>
-
-                    </a>
-
-                    <a class="btn btn-social btn-google">
-                        <i class="fa fa-2x fa-google"></i>
-                    </a>
-                </div>
-                <!-- <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div> -->
-                <button type="submit" class="btn btn-primary form-control">Register</button>
-
-            </form>
+    <form v-on:submit.prevent="onSubmit" class="ui form main-form">
+        <div class="form-inner">
+            <div class="field">
+                <label>First Name</label>
+                <input v-model="firstName" type="text" name="first_name" placeholder="First Name">
+            </div>
+            <div class="field">
+                <label>Last Name</label>
+                <input v-model="lastName" type="text" name="last_name" placeholder="Last Name">
+            </div>
+            <div class="field">
+                <label for="email">Email</label>
+                <input v-model="email" id="email" type="text" placeholder="Email">
+            </div>
+            <div class="field">
+                <label for="password">Password</label>
+                <input v-model="password" id="password" type="text" placeholder="Password">
+            </div>
+            <button @click="register" class="ui button login-btn" type="submit">Register</button>
         </div>
-    </div>
+    </form>
+    
 </template>
 
 <script>
-    import NoAuthHeader from './NoAuthHeader'
+    /* eslint-disable no-alert, no-console */
+    import axios from 'axios';
+
     export default {
         name: "Register",
+
         components: {
-            NoAuthHeader,
+
         },
-        
+
+        // props: [
+        //     "firstName",
+        //     "lastName",
+        //     "email",
+        //     "password"
+        // ],
+
+        data: function() {
+            return {
+                firstName: '',
+                lastName: '',
+                email: '',
+                password:  ''
+            }
+        },
+
+        methods: {
+            register: function() {
+                let form = {
+                    first_name: this.firstName,
+                    last_name: this.lastName,
+                    email: this.email,
+                    password: this.password
+                };
+
+                axios.post("/api/register", form).then(response => {
+                    console.log(response)
+                }).catch(error => {
+                    console.log(error);
+                })
+            },
+            onSubmit: function() {
+                
+            }
+        }
     }
 </script>
 
-<style lang="scss">
-    .register-container {
-        display: flex;
-        align-items: center;
-        height: calc(100% - #{$navbar-height});
-        form {
-            width: 50%;
-            margin: 0 auto;
-            padding: 40px;
-            box-shadow: $box-shadow;
-        }
-    }
+<style lang="scss" scoped>
+
 </style>
