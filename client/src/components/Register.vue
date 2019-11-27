@@ -26,6 +26,9 @@
 <script>
     /* eslint-disable no-alert, no-console */
     import axios from 'axios';
+    import qs from 'querystring';
+
+    const registerApi = "http://localhost:8081/api/register";
 
     export default {
         name: "Register",
@@ -58,8 +61,10 @@
                     email: this.email,
                     password: this.password
                 };
-
-                axios.post("/api/register", form).then(response => {
+                let form_query_string = qs.stringify(form);
+                console.log(form_query_string);
+                
+                axios.post(registerApi, qs.stringify(form)).then(response => {
                     console.log(response)
                 }).catch(error => {
                     console.log(error);
