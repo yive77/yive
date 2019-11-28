@@ -7,7 +7,7 @@
         <div class="right menu auth">
             <div v-if="isAuthorized" class="right-menu-options">
                 <a class="ui item" @click="$router.push('/profile')">Profile</a>
-                <a class="ui item" @click="$router.push('/logout')">Logout</a>
+                <a class="ui item" @click="logout">Logout</a>
             </div>
             <div v-else class="right-menu-options">
                 <a class="ui item" @click="$router.push('/login')">Login</a>
@@ -18,16 +18,21 @@
 </template>    
 
 <script>
-
-    import {mapActions, mapGetters} from 'vuex';
+    /* eslint-disable no-alert, no-console */
 
     export default {
         name: "Header",
+
         methods: {
-            ...mapActions(['login'])
+            logout: function() {
+                this.$store.dispatch('logout');
+                this.$router.push('/login');
+            }
         },
         computed: {
-            ...mapGetters(['isAuthorized'])
+            isAuthorized: function() {
+                return this.$store.getters.isAuthorized;
+            },
         }
     }
 </script>

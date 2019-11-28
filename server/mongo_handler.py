@@ -50,5 +50,5 @@ class MongoHandler:
 			password_hash = self.encrypt_user_pw(salt, password)
 			if password_hash == user["password_hash"]:
 				authenticated = True 
-
-		return authenticated, utility.remove_keys(user, keys=["_id", "salt", "password_hash"])
+				return authenticated, utility.remove_keys(user, keys=["_id", "salt", "password_hash"])
+		return authenticated, user
