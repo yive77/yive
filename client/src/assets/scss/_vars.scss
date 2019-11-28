@@ -44,4 +44,10 @@ html, body {
     cursor: pointer;
 }
 
+.form-error {
+    color: $error-color;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 

@@ -4,19 +4,19 @@
             <div class="form-error">{{ form_error }} </div>
             <div class="field">
                 <label>First Name</label>
-                <input v-model="firstName" type="text" name="first_name" placeholder="First Name" required>
+                <input v-model="firstName" type="text" name="first_name" placeholder="First Name">
             </div>
             <div class="field">
                 <label>Last Name</label>
-                <input v-model="lastName" type="text" name="last_name" placeholder="Last Name" required>
+                <input v-model="lastName" type="text" name="last_name" placeholder="Last Name">
             </div>
             <div class="field">
                 <label for="email">Email</label>
-                <input v-model="email" id="email" type="text" placeholder="Email" required>
+                <input v-model="email" id="email" type="email" placeholder="Email">
             </div>
             <div class="field">
                 <label for="password">Password</label>
-                <input v-model="password" id="password" type="text" placeholder="Password" required>
+                <input v-model="password" id="password" type="password" placeholder="Password">
             </div>
             <button @click="register" class="ui button login-btn" type="submit">Register</button>
         </div>
@@ -89,7 +89,4 @@
 
 <style lang="scss" scoped>
 
-    .form-error {
-        color: $error-color;
-    }
 </style>

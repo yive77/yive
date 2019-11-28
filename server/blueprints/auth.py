@@ -42,7 +42,7 @@ def login(*args, **kwargs):
 			mongo = MongoHandler()
 			authenticated, user = mongo.login(request.form)
 			if authenticated:
-				return jsonify(create_success_response(obj=user))
+				return jsonify(create_success_response("user", user))
 			return jsonify(login_error)
 
 	except Exception as e:

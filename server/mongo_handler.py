@@ -23,8 +23,7 @@ class MongoHandler:
 		user = self.create_user(register_form)
 		self.db.users.insert_one(user)
 
-		# we will be sending this user obj to the client, so let's make sure we remove any confidential data
-		return utility.remove_keys(user, keys=["_id", "password_hash", "salt"])
+		return user
 
 	def create_user(self, register_form):
 		user = {}
@@ -45,11 +44,11 @@ class MongoHandler:
 		email = request_form["email"].strip()
 		password = request_form["password"].strip()
 
-		user = self.exists({"email": email})
+		user = self.exists("email", email)
 		if user:
-			salt = user.salt
+			salt = user["salt"]
 			password_hash = self.encrypt_user_pw(salt, password)
-			if password_hash == user.password_hash:
+			if password_hash == user["password_hash"]:
 				authenticated = True 
 
-		return authenticated, user
+		return authenticated, utility.remove_keys(user, keys=["_id", "salt", "password_hash"])
