@@ -13,7 +13,7 @@ class MongoHandler:
 	def exists(self, key, value):
 		existing_record = self.db.users.find_one({key: value})
 		if existing_record:
-			return True 
+			return existing_record 
 		return False 
 
 	def store_user(self, register_form):
@@ -28,15 +28,27 @@ class MongoHandler:
 
 	def create_user(self, register_form):
 		user = {}
-		user["last_name"] = register_form.get("last_name")
-		user["first_name"] = register_form.get("first_name")
-		user["email"] = register_form.get("email")
-		user["password_hash"], user["salt"] = self.encrypt_user_pw(register_form["password"])
+		user["last_name"] = register_form.get("last_name").strip()
+		user["first_name"] = register_form.get("first_name").strip()
+		user["email"] = register_form.get("email").strip()
+		user["salt"] = uuid.uuid4().hex 
+		user["password_hash"] = self.encrypt_user_pw(user["salt"], register_form["password"])
 		return user 
 
 
+	def encrypt_user_pw(self, salt, password):
+		user_password_hash = hmac.new(bytes(salt, 'utf-8'), bytes(password, 'utf-8')).hexdigest()
+		return user_password_hash
 
-	def encrypt_user_pw(self, password):
-		user_salt = uuid.uuid4().hex 
-		user_password_hash = hmac.new(bytes(user_salt, 'utf-8'), bytes(password, 'utf-8')).hexdigest()
-		return (user_password_hash, user_salt)
+	def login(self, request_form):
+		authenticated, user = False, None 
+		email = request_form["email"].strip()
+		password = request_form["password"].strip()
+
+		user = self.exists({"email": email})
+		if user:
+			salt = user.salt
+			password_hash = self.encrypt_user_pw(salt, password)
+			if password_hash == user.password_hash:
+				return True
+		return False
