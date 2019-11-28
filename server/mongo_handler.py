@@ -50,5 +50,6 @@ class MongoHandler:
 			salt = user.salt
 			password_hash = self.encrypt_user_pw(salt, password)
 			if password_hash == user.password_hash:
-				return True
-		return False
+				authenticated = True 
+
+		return authenticated, user

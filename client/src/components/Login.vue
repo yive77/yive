@@ -31,7 +31,7 @@
         methods: {
             ...mapActions(['login']),
             onSubmit: () => {
-            }
+}
         },
         computed: {
             ...mapGetters(['isAuthorized'])
