@@ -19,6 +19,9 @@
 <script>
 
     import {mapActions, mapGetters} from 'vuex';
+    import qs from 'querystring';
+
+    const login_url = "http://localhost:8081/api/login";
 
     export default {
         name: "Login",
@@ -29,9 +32,21 @@
             }
         },
         methods: {
-            ...mapActions(['login']),
-            onSubmit: () => {
-}
+            login: () => {
+                let form = {
+                    email: this.email.trim(),
+                    password: this.password.trim(),
+                }
+
+                if (form.email.length > 0 && form.password.length > 0) {
+                    axios.post(login_url, qs.stringify(form)).then(response => {
+                        console.log(response);
+                    }).catch(error => {
+                        console.log(error);
+                    })
+                }
+            },
+            onSubmit: () => {}
         },
         computed: {
             ...mapGetters(['isAuthorized'])
