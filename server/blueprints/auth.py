@@ -29,3 +29,26 @@ def register(*args, **kwargs):
 		print(str(e))
 		return str(e)
 
+@cross_origin
+@auth_blueprint.route("/api/login", methods=["POST"])
+@no_auth_required
+@form_sanity
+def login(*args, **kwargs):
+	try:
+		no_satisfy = kwargs["no_satisfy"]
+		if len(no_satisfy) > 0:
+			return jsonify(create_incomplete_form_error(no_satisfy))
+		else:
+			mongo = MongoHandler()
+			authenticated, user = mongo.login(request.form)
+			if authenticated:
+				return jsonify(create_success_response(obj=user))
+			return jsonify(login_error)
+
+	except Exception as e:
+		print(str(e))
+		return str(e)
+
+
+
+

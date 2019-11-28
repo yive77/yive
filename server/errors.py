@@ -13,6 +13,11 @@ email_taken_error = {
 	"message": "That email is already in use."
 }
 
+login_error = {
+	"error": True,
+	"message": "The credentials you provided are not valid"
+}
+
 def create_incomplete_form_error(form_elments):
 	return {
 		"error": True,
